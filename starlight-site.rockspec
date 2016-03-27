@@ -1,4 +1,4 @@
 dependencies = {
   "sailor >= 0.4",
-  "Sailor-md >= 0.1"
+  "sailor-md >= 0.1"
 }
