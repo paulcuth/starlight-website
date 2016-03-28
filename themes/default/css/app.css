@@ -154,4 +154,7 @@ footer {
   display: block;
   padding-top: 0;
 }
+
+.http-404 {
+  text-align: center;
 }
