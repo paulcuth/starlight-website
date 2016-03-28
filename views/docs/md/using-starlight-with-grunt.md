@@ -53,4 +53,4 @@ Remember to set which file will execute first using `options.main`.
       }
     });
 
-See also: [Grunt with modules example](https://github.com/paulcuth/starlight-examples/tree/master/grunt-with-modules)
+See also: [Grunt with modules example](https://github.com/paulcuth/starlight-examples/tree/master/grunt-modules)
