@@ -6,7 +6,7 @@ local conf = (require "conf.conf").sailor
 
 -- Define here where Xavante HTTP documents scripts are located
 local webDir = "."
-local port = tonumber(...) or 8080
+local port = tonumber(({...})[1] or 8080)
 
 local uri_map
 

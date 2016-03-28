@@ -1,19 +1,27 @@
 local docs = {}
 local PAGES = {
-  'embedding-lua-in-the-web',
-  'interacting-with-javascript',
-  'usage-with-grunt'
+  'Embedding Lua in the Web',
+  'Interacting with JavaScript',
+  'Using Starlight with Grunt'
 }
+
+function createSlug (title) 
+  title = string.lower(title)
+  return string.gsub(title, '[^a-z]', '-')
+end
 
 
 function docs.index(page)
-    page:render('docs', { name = PAGES[1] })
+    page:redirect('docs/'..createSlug(PAGES[1]))
 end
 
-for _, name in ipairs(PAGES) do
+
+for _, title in ipairs(PAGES) do
+  local name = createSlug(title)
+
   docs[name] = function (page)
-    page.layout = 'left-nav';
-    page:render('docs', { name = name });
+    page.layout = 'left-nav'
+    page:render('docs', { name = name, title = title })
   end
 end
 

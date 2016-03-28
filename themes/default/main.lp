@@ -6,9 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="../../docs-assets/ico/favicon.png">
 
-    <title>Starlight - Lua to JavaScript transpiler :: <%=page.title%></title>
-
-    <!-- Bootstrap core CSS -->
+    <title>Starlight - Lua to JavaScript translator :: <%=page.title%></title>
     <link href="<%=page.theme_path%>/css/app.css" rel="stylesheet">
 
   	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -18,14 +16,12 @@
     <![endif]-->
   </head>
 
-  <body id="<%=pageId%>">
+  <body>
     <header>
       <h1>Starlight</h1>
     </header>
 
     <section class="sidebar">
-      <nav>
-      </nav>
     </section>
 
     <section class="content">

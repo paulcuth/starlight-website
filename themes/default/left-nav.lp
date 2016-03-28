@@ -6,8 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="../../docs-assets/ico/favicon.png">
 
-    <title>Starlight - Lua to JavaScript translator :: <%=page.title%></title>
-    <link href="<%=page.theme_path%>/css/app.css" rel="stylesheet">
+    <title>Starlight - Lua to JavaScript translator :: <%= title %></title>
+    <link href="<%= page.theme_path %>/css/app.css" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -16,7 +16,7 @@
     <![endif]-->
   </head>
 
-  <body id="<%=pageId%>" class="left-nav">
+  <body class="left-nav">
     <div class="sidebar">
       <header>
         <h1><a href="/">Starlight</a></h1>
@@ -26,12 +26,13 @@
         <ol>
           <li><a href="/docs/embedding-lua-in-the-web">Embedding Lua in the Web</a></li>
           <li><a href="/docs/interacting-with-javascript">Interacting with JavaScript</a></li>
-          <li><a href="/docs/usage-with-grunt">Usage with Grunt</a></li>
+          <li><a href="/docs/using-starlight-with-grunt">Using Starlight with Grunt</a></li>
         </ol>
         <ol>
-          <li><a href="/download">Download</li>
+          <li><a href="/download">Download</a></li>
           <li><a href="https://github.com/paulcuth/starlight-examples/">Examples</a></li>
-          <li><a href="https://github.com/paulcuth/starlight/">Github</a></li>
+          <li><a href="https://github.com/paulcuth/starlight/">GitHub</a></li>
+          <li><a href="https://twitter.com/starlight/">Twitter</a></li>
         </ol>
       </nav>
     </div>
@@ -42,11 +43,6 @@
       </div>
     </article>
 
-    <footer>
-      <p>
-        © 2016 Paul Cuthbertson. Powered by <a href="http://sailorproject.org">Sailor MVC</a>, <a href="/">Starlight</a> and <a href="http://lua.org" target="_blank">Lua</a>.
-      </p>
-    </footer>
-
+    <% page:include(page.theme_path..'/_footer') %>
   </body>
 </html>

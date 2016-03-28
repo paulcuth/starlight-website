@@ -11,7 +11,7 @@ Here's a simple example:
 
 <a class="jsbin-embed" href="http://jsbin.com/rovibad/embed?html,console">JS Bin on jsbin.com</a><script src="http://static.jsbin.com/js/embed.min.js?3.35.11"></script>
 
-As you can see we wrap the Lua code in a `<script>` tag with `type="application/lua"`. This tells the browser not to parse it as JavaScript and also tells Starlight that it is something that it should parse and translate the code within.
+As you can see we wrap the Lua code in a `<script>` tag with `type="application/lua"`. This tells the browser not to parse it as JavaScript and also tells Starlight that it should parse and translate the code within.
 
 We're also including the Babel browser runtime because Starlight outputs ES6 and, for the time being at least, most browsers do not fully support ES6. Hopefully over time the need to include Babel will reduce significantly. See also [Using with Grunt]() to discover how to precompile your scripts and negate the need for Babel.
 

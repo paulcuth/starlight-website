@@ -13,6 +13,7 @@ To do this, you'll need to install the Starlight Grunt plugin. You'll also need 
 
 Then, in your Gruntfile:
 
+    grunt.loadNpmTasks('grunt-starlight');
     grunt.initConfig({
       starlight: {
         'hello-world': {
@@ -37,6 +38,7 @@ See also: [Grunt hello world example](https://github.com/paulcuth/starlight-exam
 You may also build many Lua files into a single JavaScript file, like the following example for building Starlight's own tests. 
 Remember to set which file will execute first using `options.main`.
 
+    grunt.loadNpmTasks('grunt-starlight');
     grunt.initConfig({
       starlight: {
         test: {
