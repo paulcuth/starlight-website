@@ -32,7 +32,7 @@
           <li><a href="/download">Download</a></li>
           <li><a href="https://github.com/paulcuth/starlight-examples/">Examples</a></li>
           <li><a href="https://github.com/paulcuth/starlight/">GitHub</a></li>
-          <li><a href="https://twitter.com/starlight/">Twitter</a></li>
+          <li><a href="https://twitter.com/lua_to_es6/">Twitter</a></li>
         </ol>
       </nav>
     </div>
