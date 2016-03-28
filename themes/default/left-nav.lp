@@ -19,7 +19,7 @@
   <body id="<%=pageId%>" class="left-nav">
     <div class="sidebar">
       <header>
-        <h1>Starlight</h1>
+        <h1><a href="/">Starlight</a></h1>
       </header>
 
       <nav>
