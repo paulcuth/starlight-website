@@ -44,5 +44,6 @@
     </article>
 
     <% page:include(page.theme_path..'/_footer') %>
+    <% page:include(page.theme_path..'/_analytics') %>
   </body>
 </html>
