@@ -17,7 +17,7 @@
     </p>
 
     <h3>Package Lua in your front-end build scripts</h3>
-    <p>Use the Grunt plugin to precompile all your Lua scripts to JavaScript. Find out more in the <a href="/docs/usage-with-grunt">docs</a>.</p>
+    <p>Use the Grunt plugin to precompile all your Lua scripts to JavaScript. Find out more in the <a href="/docs/using-starlight-with-grunt">docs</a>.</p>
       <pre><code>grunt.loadNpmTasks('grunt-starlight');
 grunt.initConfig({
   starlight: {
