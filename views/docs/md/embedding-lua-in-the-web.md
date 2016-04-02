@@ -31,6 +31,20 @@ Starlight will parse any `<script>` tags with the following `type`s:
 
 
 
+### Including remote scripts
+
+As with JavaScript, you can also include and execute Lua from remote scripts using the `src` attribute. 
+One difference, however, is that files are loaded over [<attr title="XMLHttpRequest">XHR</attr>](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest), so the remote scripts will need to adhere to [<attr title="Cross-Origin Resource Sharing">CORS</attr>](https://developer.mozilla.org/en-US/docs/Web/HTTP/Access_control_CORS).
+
+[counter-app.lua](http://paulcuth.me.uk/starlight/lua/counter-app.lua)
+<a class="jsbin-embed" href="http://jsbin.com/mohoci/embed?html,output">JS Bin on jsbin.com</a><script src="http://static.jsbin.com/js/embed.min.js?3.35.12"></script>
+
+Scripts are loaded and parsed in the order that they appear in the page. 
+You can add a `defer` attribute to defer the loading of the script until after others have loaded, so that your script does not block.
+The `defer` attribute is ignored on inline script tags.
+
+
+
 ### Executing Lua programmatically from JavaScript
 
 You can use Starlight to execute arbitrary Lua code from within JavaScript, using `starlight.parser.parse()`.
@@ -45,9 +59,19 @@ A nice way to use the parser in this manner is to place the Lua code in script t
 
 ### Modules
 
-You can also turn your script tag into a Lua module by giving it a `data-modname` attribute. This script will be preloaded but not executed and can later be required by any other Lua script. Make sure you define a module in a tag that precedes those that require it, in the order of the page.
+You can also turn your script tag into a Lua module by giving it a `data-modname` attribute. 
+This script will be preloaded but not executed and can later be required by any other Lua script. 
+Make sure you define a module in a tag that precedes those that require it, in the order they appear in the page.
 
 <a class="jsbin-embed" href="http://jsbin.com/gadequp/embed?html,console">JS Bin on jsbin.com</a><script src="http://static.jsbin.com/js/embed.min.js?3.35.11"></script>
+
+The `data-modname` attribute can also be used on remote script tags.
+When using script tags, all modules need to be explicitly defined within the page; using `require()` with a relative file path will fail unless the required script is defined in the markup. This doesn't not apply when you use Starlight to precompile your Lua to JavaScript, see [Using Starlight with Grunt](./using-starlight-with-grunt) for more information.
+
+[fibonacci-module.lua](http://paulcuth.me.uk/starlight/lua/fibonacci-module.lua) / 
+[fibonacci-app.lua](http://paulcuth.me.uk/starlight/lua/fibonacci-app.lua)
+<a class="jsbin-embed" href="http://jsbin.com/xumoka/embed?html,output">JS Bin on jsbin.com</a><script src="http://static.jsbin.com/js/embed.min.js?3.35.12"></script>
+
 
 
 
