@@ -3,7 +3,7 @@
 
 ### Initialising the Lua global namespace
 
-You can initialise the Lua global namespace with functions and values for your system. 
+You can initialise the Lua global namespace with functions and values for your application. 
 Simply add JavaScript keys and values to `window.starlight.config.env` *before* including the Starlight script.
 
 The JavaScript functions can be called directly from within the Lua environment.
@@ -16,7 +16,7 @@ See also: [Creating Lua tables in JavaScript](#creating-lua-tables-in-javascript
 
 ### Accessing the JavaScript world from Lua
 
-The JavaScript `window` object is available with the same name, but be aware `window ~= _G`. You need to access all JavaScript APIs and the DOM through the `window` table, for example:
+The JavaScript `window` object is available in the Lua global namespace with the same name, but be aware `window ~= _G`. You need to access all JavaScript APIs and the DOM through the `window` table, for example:
 
     <script type="application/lua">
       window:alert('hello')
@@ -49,7 +49,7 @@ Make sure you always use the colon syntax to call methods on the DOM, as in the 
 
 Lua tables can be created in JavaScript and then be passed back into the Lua world.
 
-The properties on a Lua table object muct be accessed via `get()` and `set()` methods. `rawget()` and `rawset()` are also available to bypass metamethods. 
+When accessing properties of a Lua table object in JavaScript, you should use the `get()` and `set()` methods. `rawget()` and `rawset()` are also available to bypass metamethods. 
 
 <a class="jsbin-embed" href="http://jsbin.com/zazaxi/embed?html,console"> on jsbin.com</a><script src="http://static.jsbin.com/js/embed.min.js?3.35.11"></script>
 

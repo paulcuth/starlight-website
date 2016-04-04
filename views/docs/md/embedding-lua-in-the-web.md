@@ -13,11 +13,11 @@ Here's a simple example:
 
 As you can see we wrap the Lua code in a `<script>` tag with `type="application/lua"`. This tells the browser not to parse it as JavaScript and also tells Starlight that it should parse and translate the code within.
 
-We're also including the Babel browser runtime because Starlight outputs ES6 and, for the time being at least, most browsers do not fully support ES6. Hopefully over time the need to include Babel will reduce significantly. See also [Using with Grunt]() to discover how to precompile your scripts and negate the need for Babel.
+We're also including the Babel browser runtime because Starlight outputs ES6 and, for the time being at least, most browsers do not fully support ES6. Hopefully over time the need to include Babel will reduce significantly. See also [Using Starlight with Grunt](./using-starlight-with-grunt) to discover how to precompile your scripts and negate the need for Babel.
 
-You'll also need to include Starlight itself. We're using the boolean attribute `data-run-script-tags` here to tell Starlight to execute the scriptS on page load. Without this attribute the scripts will need to be executed manually.
+You'll also need to include Starlight itself. We're using the boolean attribute `data-run-script-tags` here to tell Starlight to execute the scripts on page load. Without this attribute the scripts will need to be executed manually.
 
-That's all you need to get started. Notice that the `print()` function will output to the browser's console window. This can be modified in the Starlight configuration, next.
+That's all you need to get started. Notice that the `print()` function will output to the browser's console window. This can be modified in the Starlight configuration.
 
 
 #### MIME types
@@ -66,7 +66,7 @@ Make sure you define a module in a tag that precedes those that require it, in t
 <a class="jsbin-embed" href="http://jsbin.com/gadequp/embed?html,console">JS Bin on jsbin.com</a><script src="http://static.jsbin.com/js/embed.min.js?3.35.11"></script>
 
 The `data-modname` attribute can also be used on remote script tags.
-When using script tags, all modules need to be explicitly defined within the page; using `require()` with a relative file path will fail unless the required script is defined in the markup. This doesn't not apply when you use Starlight to precompile your Lua to JavaScript, see [Using Starlight with Grunt](./using-starlight-with-grunt) for more information.
+When using script tags, all modules need to be explicitly defined within the page; using `require()` with a relative file path will fail unless the required script is defined in the markup. This does not apply when you use Starlight to precompile your Lua to JavaScript, see [Using Starlight with Grunt](./using-starlight-with-grunt) for more information.
 
 [fibonacci-module.lua](http://paulcuth.me.uk/starlight/lua/fibonacci-module.lua) / 
 [fibonacci-app.lua](http://paulcuth.me.uk/starlight/lua/fibonacci-app.lua)
@@ -85,7 +85,7 @@ In the following example, we are redirecting the `stdout` to output to a DOM ele
 
 <a class="jsbin-embed" href="http://jsbin.com/silezu/embed?html,output">JS Bin on jsbin.com</a><script src="http://static.jsbin.com/js/embed.min.js?3.35.11"></script>
 
-To use the configuration object to initialise the Lua global environment, see [Interacting with the JavaScript world](../interacting-with-the-javascript-world).
+To use the configuration object to initialise the Lua global environment, see [Interacting with JavaScript](./interacting-with-javascript).
 
 
 
