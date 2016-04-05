@@ -14,28 +14,47 @@ To do this, you'll need to install the Starlight Grunt plugin. You'll also need 
 Then, in your Gruntfile:
 
     grunt.loadNpmTasks('grunt-starlight');
+    grunt.loadNpmTasks('grunt-babel');
+
     grunt.initConfig({
       starlight: {
-        'hello-world': {
-          src: 'src/lua/hello-world.lua',
-          dest: 'dist/js/hello-world.lua.js',
+        counter: {
+          src: 'src/counter-app.lua',
+          dest: 'dist/counter-app.es6.js',
         }
       },
+
       babel: {
         options: {
-          plugins: ['transform-es2015-destructuring'],
+          plugins: ['transform-es2015-destructuring']
         },
-        'hello-world': {
-          src: 'dist/js/hello-world.lua.js',
-          dest: 'dist/js/hello-world.lua.js',
-          }
+        counter: {
+          src: 'dist/counter-app.es6.js',
+          dest: 'dist/counter-app.js',
         }
       }
     });
 
-See also: [Grunt hello world example](https://github.com/paulcuth/starlight-examples/tree/master/grunt-hello-world)
+    grunt.registerTask('default', ['starlight:counter', 'babel:counter']);
 
-You may also build many Lua files into a single JavaScript file, like the following example for building Starlight's own tests. 
+
+
+
+### Serve
+
+All you need to include in the page is the Starlight runtime and your built script, plus any markup required by you app.
+
+Note that you do not need to include Babel in thepage when building in advance.
+
+<a class="jsbin-embed" href="http://jsbin.com/casocav/embed?html,output">JS Bin on jsbin.com</a><script src="http://static.jsbin.com/js/embed.min.js?3.35.12"></script>
+
+See also: [Grunt counter app example](https://github.com/paulcuth/starlight-examples/tree/master/grunt-counter-app)
+
+
+
+### Package
+
+You can also build many Lua files into a single JavaScript file, like the following example for building Starlight's own tests. 
 Remember to set which file will execute first using `options.main`.
 
     grunt.loadNpmTasks('grunt-starlight');

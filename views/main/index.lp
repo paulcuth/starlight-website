@@ -10,8 +10,8 @@
 
 <article>
   <div class="content">
-    <h3>Use Lua in <code>&lt;script&gt;</code> tags</h3>
-    <p>Embed Lua code into your Web page, load remote Lua scripts, organise your code into modules and use JavaScript APIs and the DOM with ease. Starlight translates Lua to ES2015, find out more in the <a href="/docs">docs</a>.</p>
+    <h3>Use Lua in <code>&lt;script&gt;</code> tags on the Web</h3>
+    <p>Embed Lua code into your Web page, load remote Lua scripts, organise your code into modules and use JavaScript APIs and the DOM with ease. Starlight translates Lua to ES2015, discover more in the <a href="/docs">docs</a>.</p>
     
     <pre><code>&lt;script type="application/lua" src="./scripts/my-app.lua"&gt;&lt;/script&gt;</code></pre>
 
@@ -22,7 +22,7 @@
 
 
     <h3>Package Lua in your front-end build scripts</h3>
-    <p>Use the Grunt plugin to precompile all your Lua scripts to JavaScript. Find out more in the <a href="/docs/using-starlight-with-grunt">docs</a>.</p>
+    <p>Use the Grunt plugin to precompile all your Lua scripts to JavaScript. Discover more in the <a href="/docs/using-starlight-with-grunt">docs</a>.</p>
       <pre><code>grunt.loadNpmTasks('grunt-starlight');
 grunt.initConfig({
   starlight: {
