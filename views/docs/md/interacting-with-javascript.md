@@ -8,7 +8,30 @@ Simply add JavaScript keys and values to `window.starlight.config.env` *before* 
 
 The JavaScript functions can be called directly from within the Lua environment.
 
-<a class="jsbin-embed" href="http://jsbin.com/reheru/embed?html,console">JS Bin on jsbin.com</a><script src="http://static.jsbin.com/js/embed.min.js?3.35.11"></script>
+<figure>
+  <pre><code class="html">⋮
+&lt;script type="application/lua"&gt;
+  print('API version:', <b>API_VERSION</b>)
+  print('Time:', <b>getTimestamp()</b>)
+&lt;/script&gt;
+&nbsp;
+&lt;script&gt;
+  window.starlight = {
+&nbsp;   config: {
+&nbsp;     env: {
+&nbsp;       <b>_API\_VERSION: 2,
+&nbsp;       getTimestamp: function () {
+&nbsp;         return Date.now();
+&nbsp;       }</b>,
+&nbsp;     },
+&nbsp;   },
+  };
+&lt;/script&gt;
+⋮</code></pre>
+<pre><code class="console">API version: 2
+Time:  1471725254319</code></pre>
+  <figcaption class="js-bin"><a href="http://jsbin.com/reheru/edit?html,console">Run in JS Bin</a></figcaption>
+</figure>
 
 See also: [Creating Lua tables in JavaScript](#creating-lua-tables-in-javascript)
 
@@ -18,30 +41,44 @@ See also: [Creating Lua tables in JavaScript](#creating-lua-tables-in-javascript
 
 The JavaScript `window` object is available in the Lua global namespace with the same name, but be aware `window ~= _G`. You need to access all JavaScript APIs and the DOM through the `window` table, for example:
 
-    <script type="application/lua">
-      window:alert('hello')
-      window.document:createElement('div')
-      window.navigator.geolocation:getCurrentPosition(successCallback, failCallback)
-    </script>
-
-<a class="jsbin-embed" href="http://jsbin.com/yefovo/embed?html,output">JS Bin on jsbin.com</a><script src="http://static.jsbin.com/js/embed.min.js?3.35.11"></script>
+<figure>
+  <pre><code class="html">⋮
+&lt;button id="click-me"&gt;Click me&lt;/button&gt;
+&nbsp;
+&lt;script type="application/lua"&gt;
+  local button = <b>window.document:getElementById('click-me')
+&nbsp;
+  button:addEventListener('click', function () 
+&nbsp;   window:alert('Hello!')
+  end)</b>
+&lt;/script&gt;
+⋮</code></pre>
+  <figcaption class="js-bin"><a href="http://jsbin.com/yefovo/edit?html,output">Run in JS Bin</a></figcaption>
+</figure>
 
 
 #### window.extract()
 
-If you really want to access the properties of `window` in the global namespace, you can call `window.extract()`.
-
-    <script type="application/lua">
-      window.extract()
-
-      alert('hello')
-      document:createElement('div')
-      navigator.geolocation:getCurrentPosition(successCallback, failCallback)
-    </script>
-
+If you really want to access the properties of `window` in the global namespace, you can call `window.extract()`. 
 Make sure you always use the colon syntax to call methods on the DOM, as in the examples above.
 
-<a class="jsbin-embed" href="http://jsbin.com/cococo/embed?html,output">JS Bin on jsbin.com</a><script src="http://static.jsbin.com/js/embed.min.js?3.35.11"></script>
+<figure>
+  <pre><code class="html">⋮
+&lt;button id="hello"&gt;Click me&lt;/button&gt;
+&nbsp;
+&lt;script type="application/lua"&gt;
+  <b>window.extract()</b>
+  local button = document:getElementById('hello')
+&nbsp;
+  button:addEventListener('click', function () 
+&nbsp;   local p = document:createElement('p')
+&nbsp;   p.textContent = 'Hello!!'
+&nbsp;   document.body:appendChild(p)
+  end)
+&lt;/script&gt;
+⋮</code></pre>
+  <figcaption class="js-bin"><a href="http://jsbin.com/cococo/edit?html,output">Run in JS Bin</a></figcaption>
+</figure>
 
 
 
@@ -51,11 +88,63 @@ Lua tables can be created in JavaScript and then be passed back into the Lua wor
 
 When accessing properties of a Lua table object in JavaScript, you should use the `get()` and `set()` methods. `rawget()` and `rawset()` are also available to bypass metamethods. 
 
-<a class="jsbin-embed" href="http://jsbin.com/zazaxi/embed?html,console"> on jsbin.com</a><script src="http://static.jsbin.com/js/embed.min.js?3.35.11"></script>
+<figure>
+  <pre><code class="html">⋮
+&lt;script type="application/lua"&gt;
+  local pos = getPosition();
+  print('Latitude:', pos.lat)
+  print('Longitude:', pos.lng)
+&lt;/script&gt;
+&nbsp;
+&lt;script&gt;
+  window.starlight = {
+&nbsp;   config: {
+&nbsp;     env: {
+&nbsp;       getPosition: function () {
+&nbsp;         <b>var pos = new starlight.runtime.T();
+&nbsp;         pos.set('lat', 51.74257);
+&nbsp;         pos.set('lng', -0.30186);</b>
+&nbsp;         return pos;
+&nbsp;       }
+&nbsp;     }
+&nbsp;   }
+  };
+&lt;/script&gt;
+⋮</code></pre>
+<pre><code class="console">Latitude:  51.74257
+Longitude: -0.30186</code></pre>
+  <figcaption class="js-bin"><a href="http://jsbin.com/zazaxi/edit?html,console">Run in JS Bin</a></figcaption>
+</figure>
 
-You can also pass a JavaScript object or Array to the table constructor and the resulting table will be prepopulated with the correct values.
+You can also pass a JavaScript object or array to the table constructor and the resulting table will be prepopulated with the correct values.
 
-<a class="jsbin-embed" href="http://jsbin.com/sedifi/embed?html,console">JS Bin on jsbin.com</a><script src="http://static.jsbin.com/js/embed.min.js?3.35.11"></script>
+<figure>
+  <pre><code class="html">⋮
+&lt;script type="application/lua"&gt;
+  local pos = getPosition();
+  print('Latitude:', pos.lat)
+  print('Longitude:', pos.lng)
+&lt;/script&gt;
+&nbsp;
+&lt;script&gt;
+  window.starlight = {
+&nbsp;   config: {
+&nbsp;     env: {
+&nbsp;       getPosition: function () {
+&nbsp;         return <b>new starlight.runtime.T({
+&nbsp;           lat: 51.74257,
+&nbsp;           lng: -0.30186,
+&nbsp;         });</b>
+&nbsp;       }
+&nbsp;     }
+&nbsp;   }
+  };
+&lt;/script&gt;
+⋮</code></pre>
+<pre><code class="console">Latitude:  51.74257
+Longitude: -0.30186</code></pre>
+  <figcaption class="js-bin"><a href="http://jsbin.com/sedifi/edit?html,console">Run in JS Bin</a></figcaption>
+</figure>
 
 
 
@@ -65,17 +154,73 @@ The Lua global namespace is accessible via `starlight.runtime._G`. This can be u
 
 Remember that `_G` is a Lua table and therefore we need to use `_G.get()` to access properties.
 
-<a class="jsbin-embed" href="http://jsbin.com/palivoq/embed?html,console">JS Bin on jsbin.com</a><script src="http://static.jsbin.com/js/embed.min.js?3.35.11"></script>
+<figure>
+  <pre><code class="html">⋮
+&lt;script type="application/lua"&gt;
+  local proxy = getProxy();
+  local x = proxy.starlight
+  proxy.rules = 'ok'
+&lt;/script&gt;
+&nbsp;
+&lt;script&gt;
+  window.starlight = {
+&nbsp;   config: {
+&nbsp;     env: {
+&nbsp;       getProxy: function () {
+&nbsp;         var t = new starlight.runtime.T();
+&nbsp;         var mt = new starlight.runtime.T({
+&nbsp;           __index: function (table, key) {
+&nbsp;             console.log('GET', key);
+&nbsp;           },
+&nbsp;           __newindex: function (table, key, value) {
+&nbsp;             console.log('SET', key, value)
+&nbsp;           }
+&nbsp;         });
+&nbsp;           <b>starlight.runtime._G</b>.get('setmetatable')(t, mt);
+&nbsp;         return t;            
+&nbsp;       }
+&nbsp;     }
+&nbsp;   }
+  };
+&lt;/script&gt;
+⋮</code></pre>
+<pre><code class="console">GET   starlight
+SET   rules    ok</code></pre>
+  <figcaption class="js-bin"><a href="http://jsbin.com/palivoq/edit?html,console">Run in JS Bin</a></figcaption>
+</figure>
 
 
 
 ### Returning multiple values from JavaScript
 
-Simply return a JavaScript Array containing the values. 
+Simply return a JavaScript array containing the values. 
 
-Remember that if you wish to return a Lua array, you should return a Lua table. See [Creating Lua tables in JavaScript](#creating-lua-tables-in-javascript)
+Remember that, if you wish to return a Lua array, you should return a Lua table. See [Creating Lua tables in JavaScript](#creating-lua-tables-in-javascript)
 
-<a class="jsbin-embed" href="http://jsbin.com/zukihi/embed?html,console">JS Bin on jsbin.com</a><script src="http://static.jsbin.com/js/embed.min.js?3.35.11"></script>
+<figure>
+  <pre><code class="html">⋮
+&lt;script type="application/lua"&gt;
+  <b>local lat, lng = getLatLng();</b>
+  print('Latitude:', lat)
+  print('Longitude:', lng)
+&lt;/script&gt;
+&nbsp;
+&lt;script&gt;
+  window.starlight = {
+&nbsp;   config: {
+&nbsp;     env: {
+&nbsp;       getLatLng: function () {
+&nbsp;         <b>return [51.74257, -0.30186];</b>
+&nbsp;       }
+&nbsp;     }
+&nbsp;   }
+  };
+&lt;/script&gt;
+⋮</code></pre>
+<pre><code class="console">Latitude:  51.74257
+Longitude: -0.30186</code></pre>
+  <figcaption class="js-bin"><a href="http://jsbin.com/zukihi/edit?html,console">Run in JS Bin</a></figcaption>
+</figure>
 
 
 
@@ -83,11 +228,20 @@ Remember that if you wish to return a Lua array, you should return a Lua table. 
 
 When you expose your JavaScript API to the Lua world, you can also validate and throw Lua errors.
 
-<a class="jsbin-embed" href="http://jsbin.com/zeyiha/embed?html,console">JS Bin on jsbin.com</a><script src="http://static.jsbin.com/js/embed.min.js?3.35.11"></script>
-
-
-
-
+<figure>
+  <pre><code class="html">⋮
+&lt;button&gt;DO NOT CLICK!&lt;/button&gt;
+&nbsp;
+&lt;script&gt;
+  var button = document.querySelector('button');
+  button.addEventListener('click', function () {
+&nbsp;   <b>throw new starlight.runtime.LuaError('Boooom!')</b>;
+  });
+&lt;/script&gt;  
+⋮</code></pre>
+<pre><code class="console">Uncaught LuaError: Boooom!</code></pre>
+  <figcaption class="js-bin"><a href="http://jsbin.com/jokoxavugi/edit?html,console,output">Run in JS Bin</a></figcaption>
+</figure>
 
 
 

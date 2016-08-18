@@ -20,7 +20,7 @@ for _, title in ipairs(PAGES) do
   local name = createSlug(title)
 
   docs[name] = function (page)
-    page.layout = 'left-nav'
+    page.layout = 'docs'
     page:render('docs', { name = name, title = title })
   end
 end
